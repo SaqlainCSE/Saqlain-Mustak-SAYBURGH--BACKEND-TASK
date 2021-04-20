@@ -39,6 +39,11 @@ Route::group([
     Route::get('user', 'API\Auth\AuthController@auth_user');
 });
 
+Route::middleware('auth:api', 'throttle:60,1')->group(function () {
+
+    Route::get('/roles', 'API\RoleController@index');
+    Route::post('/role/change', 'API\RoleController@change_role');
+});
 
 Route::get('/auth/users', 'API\UserController@index');
 Route::get('/auth/users/{id}', 'API\UserController@show');
