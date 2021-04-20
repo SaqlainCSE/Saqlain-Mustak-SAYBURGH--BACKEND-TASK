@@ -39,3 +39,7 @@ Route::group([
     Route::get('user', 'API\Auth\AuthController@auth_user');
 });
 
+
+Route::get('/auth/users', 'API\UserController@index');
+Route::get('/auth/users/{id}', 'API\UserController@show');
+Route::apiResource("users", "API\UserController");
