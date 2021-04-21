@@ -22,6 +22,18 @@ class LoginAPIController extends Controller
         ], 200);
     }
 
+    public function refreshToken()
+    {
+        $user = User::first();
+        $cookie = $user->refreshToken('Token Name')->cookie;
+        return response()->json([
+            'success' => true,
+            'message' => 'User Details',
+            'data' => $user,
+            'cookie' => $cookie,
+        ], 200);
+    }
+
     public function login(Request $request)
     {
         $loginData = $request->all();
@@ -49,10 +61,11 @@ class LoginAPIController extends Controller
         } else {
             $user = User::find(Auth::user()->id);
             $access_token = $user->createToken('authToken')->accessToken;
+            $refresh_token = $user->refreshToken('authToken')->cookie;
             return response()->json([
                 'success' => true,
                 'message' => 'Login Successful!',
-                'data' => ['user' => $user, 'access_token' => $access_token],
+                'data' => ['user' => $user, 'access_token' => $access_token, 'refresh_token' => $refresh_token],
             ], 200);
         }
     }
