@@ -25,6 +25,8 @@ Route::group([
     'prefix' => 'auth',
 ], function () {
     Route::get('/auth/createToken', 'API\Auth\LoginAPIController@createToken'); // just to check
+    Route::get('/auth/createToken', 'API\Auth\LoginAPIController@createToken');
+    Route::get('/auth/refreshToken', 'API\Auth\LoginAPIController@refreshToken'); 
     Route::post('login', 'API\Auth\LoginAPIController@login');
     Route::post('register', 'API\Auth\RegisterAPIController@register');
     Route::post('reset_request', 'API\Auth\PasswordResetController@create');
