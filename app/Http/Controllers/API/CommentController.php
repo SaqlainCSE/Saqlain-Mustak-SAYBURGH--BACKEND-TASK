@@ -50,7 +50,7 @@ class CommentController extends Controller
             'success' => true,
             'message' => 'comment given to post successfully',
             'data' => $comment,
-        ], 201);
+        ], 200);
     }
 
     /**
