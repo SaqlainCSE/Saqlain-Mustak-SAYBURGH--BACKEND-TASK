@@ -43,9 +43,13 @@ Route::group([
 
 Route::middleware('auth:api', 'throttle:60,1')->group(function () {
 
+
     Route::post('/blogs/{id}/comment', 'API\CommentController@store');
     Route::post('/blogs/{id}/comment', 'API\CommentController@update');
     Route::delete('/blogs/{id}/comment', 'API\CommentController@destroy');
+    Route::post('/blogs/{id}/like', 'API\LikeController@store');
+    Route::delete('/blogs/{id}/like', 'API\LikeController@destroy');
+    Route::get('/blogs/{id}/like_check', 'API\LikeController@like_check');
 
     Route::get('/roles', 'API\RoleController@index');
     Route::post('/role/change', 'API\RoleController@change_role');
