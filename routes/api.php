@@ -41,7 +41,17 @@ Route::group([
     Route::get('user', 'API\Auth\AuthController@auth_user');
 });
 
+Route::get('/blogs/index', 'API\BlogController@index');
+Route::get('/blogs/show', 'API\BlogController@show');
+Route::get('/blogs/{slug}', 'API\BlogController@showBySlug');
+Route::post('/blogs/{slug}/edit', 'API\BlogController@updateBlog');
+
+
 Route::middleware('auth:api', 'throttle:60,1')->group(function () {
+    Route::post('/blogs', 'API\BlogController@store');
+    Route::put('/blogs/{id}', 'API\BlogController@update');
+    Route::delete('/blogs/{id}', 'API\BlogController@destroy');
+    Route::get('/blogs/search', 'API\BlogController@search');
 
 
     Route::post('/blogs/{id}/comment', 'API\CommentController@store');
