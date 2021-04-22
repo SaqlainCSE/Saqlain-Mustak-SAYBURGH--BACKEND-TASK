@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::pattern('id', '[0-9]+');
 
 Route::get('/auth/createToken', 'API\Auth\LoginAPIController@createToken');
 
@@ -41,6 +42,10 @@ Route::group([
 });
 
 Route::middleware('auth:api', 'throttle:60,1')->group(function () {
+
+    Route::post('/blogs/{id}/comment', 'API\CommentController@store');
+    Route::post('/blogs/{id}/comment', 'API\CommentController@update');
+    Route::delete('/blogs/{id}/comment', 'API\CommentController@destroy');
 
     Route::get('/roles', 'API\RoleController@index');
     Route::post('/role/change', 'API\RoleController@change_role');
