@@ -55,7 +55,7 @@ Route::middleware('auth:api', 'throttle:60,1')->group(function () {
 
 
     Route::post('/blogs/{id}/comment', 'API\CommentController@store');
-    Route::post('/blogs/{id}/comment', 'API\CommentController@update');
+    Route::put('/blogs/{id}/comment', 'API\CommentController@update');
     Route::delete('/blogs/{id}/comment', 'API\CommentController@destroy');
     Route::post('/blogs/{id}/like', 'API\LikeController@store');
     Route::delete('/blogs/{id}/like', 'API\LikeController@destroy');
