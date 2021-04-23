@@ -288,24 +288,11 @@ class BlogController extends Controller
     }
 
     //Blog searching 
-    public function search(Request $request)
+    public function search($title)
     {
-        $validator = Validator::make($request->all(), [
-            'search' => ['required'],
-        ]);
-
-        if ($validator->fails()) 
-        {
-            return response()->json([
-                'success' => false,
-                'error' => $validator->errors(),
-            ], 400);
-        }
-
-        $search_txt = $request->search;
         $search_blog=Blog::orderBy('id','desc')
-                        ->where('title','like','%'.$search_txt.'%')
-                        ->orWhere('content','like','%'.$search_txt.'%')
+                        ->where('title','like','%'.$title.'%')
+                        ->orWhere('content','like','%'.$title.'%')
                         ->get();
 
         if (is_null($search_blog)) 
