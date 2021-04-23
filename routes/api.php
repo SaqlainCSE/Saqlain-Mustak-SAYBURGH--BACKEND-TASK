@@ -42,7 +42,7 @@ Route::group([
 });
 
 Route::get('/blogs/index', 'API\BlogController@index');
-Route::get('/blogs/show', 'API\BlogController@show');
+Route::get('/blogs/show/{id}', 'API\BlogController@show');
 Route::get('/blogs/{slug}', 'API\BlogController@showBySlug');
 Route::post('/blogs/{slug}/edit', 'API\BlogController@updateBlog');
 
