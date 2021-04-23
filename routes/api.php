@@ -45,13 +45,14 @@ Route::get('/blogs/index', 'API\BlogController@index');
 Route::get('/blogs/show/{id}', 'API\BlogController@show');
 Route::get('/blogs/{slug}', 'API\BlogController@showBySlug');
 Route::post('/blogs/{slug}/edit', 'API\BlogController@updateBlog');
+Route::get('/blogs/search/{title}', 'API\BlogController@search');
 
 
 Route::middleware('auth:api', 'throttle:60,1')->group(function () {
     Route::post('/blogs', 'API\BlogController@store');
     Route::put('/blogs/{id}', 'API\BlogController@update');
     Route::delete('/blogs/{id}', 'API\BlogController@destroy');
-    Route::get('/blogs/search', 'API\BlogController@search');
+    
 
 
     Route::post('/blogs/{id}/comment', 'API\CommentController@store');
